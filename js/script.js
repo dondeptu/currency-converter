@@ -6,6 +6,7 @@ let formElement = document.querySelector(".js-form");
 let eurToPln = 4.7;
 let eurToGbp = 0.86;
 let eurToUsd = 1.05;
+let changeButton = document.querySelector(".js-form__button")
 
 formElement.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -67,11 +68,12 @@ formElement.addEventListener("submit", (event) => {
     } else {
         console.log("Waluty nie mogą być takie same");
         outputAmountElement.value = "Wybież różne waluty.";
-
     }
-
-
-
-
-
 });
+
+changeButton.addEventListener("click", () => {
+    buf = outputCurrencyElement.value;
+    outputCurrencyElement.value = inputCurrencyElement.value;
+    inputCurrencyElement.value = buf;
+    outputAmountElement.value = "";
+})
