@@ -65,6 +65,7 @@
     font-weight: 700;
     display: block;
     margin: 40px auto 0;
+    cursor: pointer;
 }
 
 .form__button:hover {
