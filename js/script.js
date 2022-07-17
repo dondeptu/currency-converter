@@ -3,9 +3,6 @@ let inputAmountElement = document.querySelector(".js-amountToConvert");
 let outputCurrencyElement = document.querySelector(".js-convertTo");
 let outputAmountElement = document.querySelector(".js-amountAfterConvert");
 let formElement = document.querySelector(".js-form");
-let eurToPln = 4.7;
-let eurToGbp = 0.86;
-let eurToUsd = 1.05;
 let changeButton = document.querySelector(".js-form__button")
 
 formElement.addEventListener("submit", (event) => {
@@ -15,61 +12,76 @@ formElement.addEventListener("submit", (event) => {
     let inputAmount = inputAmountElement.value;
     let outputCurrency = outputCurrencyElement.value;
     let outputAmount = "";
-    console.log(inputCurrency.localeCompare(outputCurrency));
     if (inputCurrency.localeCompare(outputCurrency) !== 0) {
         switch (inputCurrency) {
             case "pln":
+                inputCurrency = 1 / 4.7;
                 switch (outputCurrency) {
                     case "eur":
-                        outputAmount = (1 / eurToPln * inputAmount).toFixed(2);
+                        outputCurrency = 1;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "gbp":
-                        outputAmount = (1 / eurToPln * inputAmount * eurToGbp).toFixed(2);
+                        outputCurrency = 1 / 0.86;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "usd":
-                        outputAmount = (1 / eurToPln * inputAmount * eurToUsd).toFixed(2);
+                        outputCurrency = 1 / 1.05;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                 }
                 outputAmountElement.value = outputAmount;
                 break;
             case "eur":
+                inputCurrency = 1;
                 switch (outputCurrency) {
                     case "pln":
-                        outputAmount = (eurToPln * inputAmount).toFixed(2);
+                        outputCurrency = 1 / 4.7;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "gbp":
-                        outputAmount = (eurToGbp * inputAmount).toFixed(2);
+                        outputCurrency = 1 / 0.86;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "usd":
-                        outputAmount = (eurToUsd * inputAmount).toFixed(2);
+                        outputCurrency = 1 / 1.05;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                 }
                 outputAmountElement.value = outputAmount;
                 break;
             case "gbp":
+                inputCurrency = 1 / 0.86;
                 switch (outputCurrency) {
                     case "pln":
-                        outputAmount = (1 / eurToGbp * inputAmount * eurToPln).toFixed(2);
+                        outputCurrency = 1 / 4.7;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "eur":
-                        outputAmount = (eurToGbp * inputAmount).toFixed(2);
+                        outputCurrency = 1;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "usd":
-                        outputAmount = (1 / eurToGbp * inputAmount * eurToUsd).toFixed(2);
+                        outputCurrency = 1 / 1.05;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                 }
                 outputAmountElement.value = outputAmount;
                 break;
             case "usd":
+                inputCurrency = 1 / 1.05;
                 switch (outputCurrency) {
                     case "pln":
-                        outputAmount = (1 / eurToUsd * inputAmount * eurToPln).toFixed(2);
+                        outputCurrency = 1 / 4.7;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "eur":
-                        outputAmount = (1 / eurToUsd * inputAmount).toFixed(2);
+                        outputCurrency = 1;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                     case "gbp":
-                        outputAmount = (1 / eurToUsd * inputAmount * eurToGbp).toFixed(2);
+                        outputCurrency = 1 / 1.05;
+                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
                         break;
                 }
                 outputAmountElement.value = outputAmount;
