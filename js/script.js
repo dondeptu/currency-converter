@@ -19,54 +19,63 @@ formElement.addEventListener("submit", (event) => {
     if (inputCurrency.localeCompare(outputCurrency) !== 0) {
         switch (inputCurrency) {
             case "pln":
-                if (outputCurrency === "eur") {
-                    outputAmount = (1 / eurToPln * inputAmount).toFixed(2);
-                } else if (outputCurrency === "gbp") {
-                    outputAmount = (1 / eurToPln * inputAmount * eurToGbp).toFixed(2);
-                } else if (outputCurrency === "usd") {
-                    outputAmount = (1 / eurToPln * inputAmount * eurToUsd).toFixed(2);
+                switch (outputCurrency) {
+                    case "eur":
+                        outputAmount = (1 / eurToPln * inputAmount).toFixed(2);
+                        break;
+                    case "gbp":
+                        outputAmount = (1 / eurToPln * inputAmount * eurToGbp).toFixed(2);
+                        break;
+                    case "usd":
+                        outputAmount = (1 / eurToPln * inputAmount * eurToUsd).toFixed(2);
+                        break;
                 }
-                console.log(outputAmount);
                 outputAmountElement.value = outputAmount;
                 break;
             case "eur":
-                if (outputCurrency === "pln") {
-                    outputAmount = (eurToPln * inputAmount).toFixed(2);
-                } else if (outputCurrency === "gbp") {
-                    outputAmount = (eurToGbp * inputAmount).toFixed(2);
-                } else if (outputCurrency === "usd") {
-                    outputAmount = (eurToUsd * inputAmount).toFixed(2);
+                switch (outputCurrency) {
+                    case "pln":
+                        outputAmount = (eurToPln * inputAmount).toFixed(2);
+                        break;
+                    case "gbp":
+                        outputAmount = (eurToGbp * inputAmount).toFixed(2);
+                        break;
+                    case "usd":
+                        outputAmount = (eurToUsd * inputAmount).toFixed(2);
+                        break;
                 }
-                console.log(outputAmount);
                 outputAmountElement.value = outputAmount;
                 break;
             case "gbp":
-                if (outputCurrency === "pln") {
-                    outputAmount = (1 / eurToGbp * inputAmount * eurToPln).toFixed(2);
-                } else if (outputCurrency === "eur") {
-                    outputAmount = (eurToGbp * inputAmount).toFixed(2);
-                } else if (outputCurrency === "usd") {
-                    outputAmount = (1 / eurToGbp * inputAmount * eurToUsd).toFixed(2);
+                switch (outputCurrency) {
+                    case "pln":
+                        outputAmount = (1 / eurToGbp * inputAmount * eurToPln).toFixed(2);
+                        break;
+                    case "eur":
+                        outputAmount = (eurToGbp * inputAmount).toFixed(2);
+                        break;
+                    case "usd":
+                        outputAmount = (1 / eurToGbp * inputAmount * eurToUsd).toFixed(2);
+                        break;
                 }
-                console.log(outputAmount);
                 outputAmountElement.value = outputAmount;
                 break;
             case "usd":
-                if (outputCurrency === "pln") {
-                    outputAmount = (1 / eurToUsd * inputAmount * eurToPln).toFixed(2);
-                } else if (outputCurrency === "eur") {
-                    outputAmount = (1 / eurToUsd * inputAmount).toFixed(2);
-                } else if (outputCurrency === "gbp") {
-                    outputAmount = (1 / eurToUsd * inputAmount * eurToGbp).toFixed(2);
+                switch (outputCurrency) {
+                    case "pln":
+                        outputAmount = (1 / eurToUsd * inputAmount * eurToPln).toFixed(2);
+                        break;
+                    case "eur":
+                        outputAmount = (1 / eurToUsd * inputAmount).toFixed(2);
+                        break;
+                    case "gbp":
+                        outputAmount = (1 / eurToUsd * inputAmount * eurToGbp).toFixed(2);
+                        break;
                 }
-                console.log(outputAmount);
                 outputAmountElement.value = outputAmount;
                 break;
-            default:
-                console.log("Coś poszło nie tak");
         }
     } else {
-        console.log("Waluty nie mogą być takie same");
         outputAmountElement.value = "Wybież różne waluty.";
     }
 });
