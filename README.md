@@ -1,6 +1,7 @@
 # Currency converter
 
 Hi! This is simple currency converter website I created as a part of learning forms in Java Script.
+
 The user can choose from following currencies: PLN, EUR, GBP, USD.
 
 ## Demo
