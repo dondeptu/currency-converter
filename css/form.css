@@ -5,7 +5,7 @@
 .form__fieldset {
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: #eee;
+    background-color: hsl(198deg 35% 90% / 71%);
     border: 1px solid #bbb;
     border-radius: 3px;
     padding: 20px;
