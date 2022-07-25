@@ -1,18 +1,20 @@
 {
-    const toggleCurrencies = (outputCurrencyElement, inputCurrencyElement, outputAmountElement) => {
-        const changeButton = document.querySelector(".js-form__button");
+    const onFormSubmit = (inputCurrencyElement, outputCurrencyElement, outputAmountElement) => {
+        return (event) => {
+            event.preventDefault();
 
-        changeButton.addEventListener("click", () => {
-            const buf = outputCurrencyElement.value;
+            const inputAmountElement = document.querySelector(".js-amountToConvert");
 
-            outputCurrencyElement.value = inputCurrencyElement.value;
-            inputCurrencyElement.value = buf;
-            outputAmountElement.value = "";
-        });
-    };
+            const inputAmount = inputAmountElement.value;
+            let inputCurrency = inputCurrencyElement.value;
+            let outputCurrency = outputCurrencyElement.value;
 
-    const calculateResult = (rate, inputAmount) => {
-        return (rate * inputAmount).toFixed(2);
+            if (inputCurrency.localeCompare(outputCurrency) !== 0) {
+                outputAmountElement.value = getExchangeRate(inputCurrency, outputCurrency, inputAmount);
+            } else {
+                outputAmountElement.value = "Wybież różne waluty.";
+            }
+        };
     };
 
     const getExchangeRate = (inputCurrency, outputCurrency, inputAmount) => {
@@ -73,31 +75,30 @@
         };
     };
 
-    const onFormSubmit = (event) => {
-        event.preventDefault();
-
-        const inputCurrencyElement = document.querySelector(".js-convertFrom");
-        const inputAmountElement = document.querySelector(".js-amountToConvert");
-        const outputCurrencyElement = document.querySelector(".js-convertTo");
-        const outputAmountElement = document.querySelector(".js-amountAfterConvert");
-
-        const inputAmount = inputAmountElement.value;
-        let inputCurrency = inputCurrencyElement.value;
-        let outputCurrency = outputCurrencyElement.value;
-
-        if (inputCurrency.localeCompare(outputCurrency) !== 0) {
-            outputAmountElement.value = getExchangeRate(inputCurrency, outputCurrency, inputAmount);
-        } else {
-            outputAmountElement.value = "Wybież różne waluty.";
-        }
-    }
+    const calculateResult = (rate, inputAmount) => {
+        return (rate * inputAmount).toFixed(2);
+    };
 
     const init = () => {
         const formElement = document.querySelector(".js-form");
+        const changeButton = document.querySelector(".js-form__button");
+        const outputCurrencyElement = document.querySelector(".js-convertTo");
+        const inputCurrencyElement = document.querySelector(".js-convertFrom");
+        const outputAmountElement = document.querySelector(".js-amountAfterConvert");
 
-        formElement.addEventListener("submit", onFormSubmit);
+        formElement.addEventListener("submit", onFormSubmit(inputCurrencyElement, outputCurrencyElement, outputAmountElement));
+        changeButton.addEventListener("click", toggleCurrencies(outputCurrencyElement, inputCurrencyElement, outputAmountElement));
+    };
+
+    const toggleCurrencies = (outputCurrencyElement, inputCurrencyElement, outputAmountElement) => {
+        return (event) => {
+            const buf = outputCurrencyElement.value;
+
+            outputCurrencyElement.value = inputCurrencyElement.value;
+            inputCurrencyElement.value = buf;
+            outputAmountElement.value = "";
+        };
     };
 
     init();
-
 }
