@@ -1,100 +1,96 @@
-let inputCurrencyElement = document.querySelector(".js-convertFrom");
-let inputAmountElement = document.querySelector(".js-amountToConvert");
-let outputCurrencyElement = document.querySelector(".js-convertTo");
-let outputAmountElement = document.querySelector(".js-amountAfterConvert");
-let formElement = document.querySelector(".js-form");
-let changeButton = document.querySelector(".js-form__button")
+{
+    const getExchangeRate = (inputCurrency, outputCurrency, inputAmount) => {
 
-formElement.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    let inputCurrency = inputCurrencyElement.value;
-    let inputAmount = inputAmountElement.value;
-    let outputCurrency = outputCurrencyElement.value;
-    let outputAmount = "";
-    if (inputCurrency.localeCompare(outputCurrency) !== 0) {
         switch (inputCurrency) {
             case "pln":
                 inputCurrency = 1 / 4.7;
                 switch (outputCurrency) {
                     case "eur":
                         outputCurrency = 1;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "gbp":
                         outputCurrency = 1 / 0.86;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "usd":
                         outputCurrency = 1 / 1.05;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                 }
-                outputAmountElement.value = outputAmount;
                 break;
             case "eur":
                 inputCurrency = 1;
                 switch (outputCurrency) {
                     case "pln":
                         outputCurrency = 1 / 4.7;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "gbp":
                         outputCurrency = 1 / 0.86;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "usd":
                         outputCurrency = 1 / 1.05;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                 }
-                outputAmountElement.value = outputAmount;
                 break;
             case "gbp":
                 inputCurrency = 1 / 0.86;
                 switch (outputCurrency) {
                     case "pln":
                         outputCurrency = 1 / 4.7;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "eur":
                         outputCurrency = 1;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "usd":
                         outputCurrency = 1 / 1.05;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                 }
-                outputAmountElement.value = outputAmount;
                 break;
             case "usd":
                 inputCurrency = 1 / 1.05;
                 switch (outputCurrency) {
                     case "pln":
                         outputCurrency = 1 / 4.7;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "eur":
                         outputCurrency = 1;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                     case "gbp":
                         outputCurrency = 1 / 1.05;
-                        outputAmount = (inputCurrency / outputCurrency * inputAmount).toFixed(2);
-                        break;
+                        return calculateResult;
                 }
-                outputAmountElement.value = outputAmount;
                 break;
         }
-    } else {
-        outputAmountElement.value = "Wybież różne waluty.";
     }
-});
 
-changeButton.addEventListener("click", () => {
-    buf = outputCurrencyElement.value;
-    outputCurrencyElement.value = inputCurrencyElement.value;
-    inputCurrencyElement.value = buf;
-    outputAmountElement.value = "";
-})
+    const calculateResult = (inputCurrency, outputCurrency, inputAmount) => {
+        return (inputCurrency / outputCurrency * inputAmount).toFixed(2);
+    }
+
+    const outputAmountElement = document.querySelector(".js-amountAfterConvert");
+    const formElement = document.querySelector(".js-form");
+    const changeButton = document.querySelector(".js-form__button")
+
+
+    formElement.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const inputCurrencyElement = document.querySelector(".js-convertFrom");
+        const inputAmountElement = document.querySelector(".js-amountToConvert");
+        const outputCurrencyElement = document.querySelector(".js-convertTo");
+        const inputAmount = inputAmountElement.value;
+        let inputCurrency = inputCurrencyElement.value;
+        let outputCurrency = outputCurrencyElement.value;
+        let outputAmount = "";
+        if (inputCurrency.localeCompare(outputCurrency) !== 0) {
+            outputAmountElement.value = getExchangeRate(inputCurrency, outputCurrency, inputAmount);
+        } else {
+            outputAmountElement.value = "Wybież różne waluty.";
+        }
+    });
+
+    changeButton.addEventListener("click", () => {
+        buf = outputCurrencyElement.value;
+        outputCurrencyElement.value = inputCurrencyElement.value;
+        inputCurrencyElement.value = buf;
+        outputAmountElement.value = "";
+    })
+}
