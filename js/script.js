@@ -3,66 +3,58 @@
 
         switch (inputCurrency) {
             case "pln":
-                inputCurrency = 1 / 4.7;
                 switch (outputCurrency) {
                     case "eur":
-                        outputCurrency = 1;
-                        return calculateResult;
+                        rate = 0.21;
+                        return (rate * inputAmount).toFixed(2);
                     case "gbp":
-                        outputCurrency = 1 / 0.86;
-                        return calculateResult;
+                        rate = 0.18;
+                        return (rate * inputAmount).toFixed(2);
                     case "usd":
-                        outputCurrency = 1 / 1.05;
-                        return calculateResult;
+                        rate = 0.22;
+                        return (rate * inputAmount).toFixed(2);
                 }
                 break;
             case "eur":
-                inputCurrency = 1;
                 switch (outputCurrency) {
                     case "pln":
-                        outputCurrency = 1 / 4.7;
-                        return calculateResult;
+                        rate = 4.72;
+                        return (rate * inputAmount).toFixed(2);
                     case "gbp":
-                        outputCurrency = 1 / 0.86;
-                        return calculateResult;
+                        rate = 0.85;
+                        return (rate * inputAmount).toFixed(2);
                     case "usd":
-                        outputCurrency = 1 / 1.05;
-                        return calculateResult;
+                        rate = 1.02;
+                        return (rate * inputAmount).toFixed(2);
                 }
                 break;
             case "gbp":
-                inputCurrency = 1 / 0.86;
                 switch (outputCurrency) {
                     case "pln":
-                        outputCurrency = 1 / 4.7;
-                        return calculateResult;
+                        rate = 5.57;
+                        return (rate * inputAmount).toFixed(2);
                     case "eur":
-                        outputCurrency = 1;
-                        return calculateResult;
+                        rate = 1.18;
+                        return (rate * inputAmount).toFixed(2);
                     case "usd":
-                        outputCurrency = 1 / 1.05;
-                        return calculateResult;
+                        rate = 1.2;
+                        return (rate * inputAmount).toFixed(2);
                 }
                 break;
             case "usd":
-                inputCurrency = 1 / 1.05;
                 switch (outputCurrency) {
                     case "pln":
-                        outputCurrency = 1 / 4.7;
-                        return calculateResult;
+                        rate = 4.62;
+                        return (rate * inputAmount).toFixed(2);
                     case "eur":
-                        outputCurrency = 1;
-                        return calculateResult;
+                        rate = 0.98;
+                        return (rate * inputAmount).toFixed(2);
                     case "gbp":
-                        outputCurrency = 1 / 1.05;
-                        return calculateResult;
+                        rate = 0.83;
+                        return (rate * inputAmount).toFixed(2);
                 }
                 break;
         }
-    }
-
-    const calculateResult = (inputCurrency, outputCurrency, inputAmount) => {
-        return (inputCurrency / outputCurrency * inputAmount).toFixed(2);
     }
 
     const outputAmountElement = document.querySelector(".js-amountAfterConvert");
