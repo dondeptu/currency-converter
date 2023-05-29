@@ -2,74 +2,60 @@
     const onFormSubmit = (inputCurrencyElement, outputCurrencyElement, outputAmountElement) => {
         return (event) => {
             event.preventDefault();
-
             const inputAmountElement = document.querySelector(".js-amountToConvert");
 
             const inputAmount = inputAmountElement.value;
-            let inputCurrency = inputCurrencyElement.value;
-            let outputCurrency = outputCurrencyElement.value;
+            const inputCurrency = inputCurrencyElement.value;
+            const outputCurrency = outputCurrencyElement.value;
 
             if (inputCurrency.localeCompare(outputCurrency) !== 0) {
-                outputAmountElement.value = getExchangeRate(inputCurrency, outputCurrency, inputAmount);
+                outputAmountElement.value = calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount);
             } else {
                 outputAmountElement.value = "Wybież różne waluty.";
             }
         };
     };
 
-    const getExchangeRate = (inputCurrency, outputCurrency, inputAmount) => {
-
+    const getExchangeRate = (inputCurrency, outputCurrency) => {
         switch (inputCurrency) {
             case "pln":
                 switch (outputCurrency) {
                     case "eur":
-                        rate = 0.21;
-                        return calculateResult(rate, inputAmount);
+                        return 0.21;
                     case "gbp":
-                        rate = 0.18;
-                        return calculateResult(rate, inputAmount);
+                        return 0.18;
                     case "usd":
-                        rate = 0.22;
-                        return calculateResult(rate, inputAmount);
+                        return 0.22;
                 };
                 break;
             case "eur":
                 switch (outputCurrency) {
                     case "pln":
-                        rate = 4.72;
-                        return calculateResult(rate, inputAmount);
+                        return 4.72;
                     case "gbp":
-                        rate = 0.85;
-                        return calculateResult(rate, inputAmount);
+                        return 0.85;
                     case "usd":
-                        rate = 1.02;
-                        return calculateResult(rate, inputAmount);
+                        return 1.02;
                 };
                 break;
             case "gbp":
                 switch (outputCurrency) {
                     case "pln":
-                        rate = 5.57;
-                        return calculateResult(rate, inputAmount);
+                        return 5.57;
                     case "eur":
-                        rate = 1.18;
-                        return calculateResult(rate, inputAmount);
+                        return 1.18;
                     case "usd":
-                        rate = 1.2;
-                        return calculateResult(rate, inputAmount);
+                        return 1.2;
                 };
                 break;
             case "usd":
                 switch (outputCurrency) {
                     case "pln":
-                        rate = 4.62;
-                        return calculateResult(rate, inputAmount);
+                        return 4.62;
                     case "eur":
-                        rate = 0.98;
-                        return calculateResult(rate, inputAmount);
+                        return 0.98;
                     case "gbp":
-                        rate = 0.83;
-                        return calculateResult(rate, inputAmount);
+                        return 0.83;
                 };
                 break;
         };
@@ -77,6 +63,16 @@
 
     const calculateResult = (rate, inputAmount) => {
         return (rate * inputAmount).toFixed(2);
+    };
+
+    const toggleCurrencies = (outputCurrencyElement, inputCurrencyElement, outputAmountElement) => {
+        return (event) => {
+            const buf = outputCurrencyElement.value;
+
+            outputCurrencyElement.value = inputCurrencyElement.value;
+            inputCurrencyElement.value = buf;
+            outputAmountElement.value = "";
+        };
     };
 
     const init = () => {
@@ -88,16 +84,6 @@
 
         formElement.addEventListener("submit", onFormSubmit(inputCurrencyElement, outputCurrencyElement, outputAmountElement));
         changeButton.addEventListener("click", toggleCurrencies(outputCurrencyElement, inputCurrencyElement, outputAmountElement));
-    };
-
-    const toggleCurrencies = (outputCurrencyElement, inputCurrencyElement, outputAmountElement) => {
-        return (event) => {
-            const buf = outputCurrencyElement.value;
-
-            outputCurrencyElement.value = inputCurrencyElement.value;
-            inputCurrencyElement.value = buf;
-            outputAmountElement.value = "";
-        };
     };
 
     init();
