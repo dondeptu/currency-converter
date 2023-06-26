@@ -8,63 +8,25 @@
             const inputCurrency = inputCurrencyElement.value;
             const outputCurrency = outputCurrencyElement.value;
 
-            outputAmountElement.value = inputCurrency.localeCompare(outputCurrency) !== 0 ? calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount) : "Wybież różne waluty.";
-
-            // if (inputCurrency.localeCompare(outputCurrency) !== 0) {
-            //     outputAmountElement.value = calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount);
-            // } else {
-            //     outputAmountElement.value = "Wybież różne waluty.";
-            // }
+            outputAmountElement.value = inputCurrency.localeCompare(outputCurrency) !== 0 ? calculateResult(inputCurrency, outputCurrency, inputAmount).toFixed(2) : "Wybież różne waluty.";
         };
     };
 
-    const getExchangeRate = (inputCurrency, outputCurrency) => {
-        switch (inputCurrency) {
-            case "pln":
-                switch (outputCurrency) {
-                    case "eur":
-                        return 0.21;
-                    case "gbp":
-                        return 0.18;
-                    case "usd":
-                        return 0.22;
-                };
-                break;
+    const getExchangeRate = (currency) => {
+        switch (currency) {
             case "eur":
-                switch (outputCurrency) {
-                    case "pln":
-                        return 4.72;
-                    case "gbp":
-                        return 0.85;
-                    case "usd":
-                        return 1.02;
-                };
-                break;
+                return 4.72;
             case "gbp":
-                switch (outputCurrency) {
-                    case "pln":
-                        return 5.57;
-                    case "eur":
-                        return 1.18;
-                    case "usd":
-                        return 1.2;
-                };
-                break;
+                return 5.57;
             case "usd":
-                switch (outputCurrency) {
-                    case "pln":
-                        return 4.62;
-                    case "eur":
-                        return 0.98;
-                    case "gbp":
-                        return 0.83;
-                };
-                break;
-        };
-    };
+                return 4.62;
+            case "pln":
+                return 1.0;
+        }
+    }
 
-    const calculateResult = (rate, inputAmount) => {
-        return (rate * inputAmount).toFixed(2);
+    const calculateResult = (inputCurrency, outputCurrency, inputAmount) => {
+        return ((inputAmount * getExchangeRate(inputCurrency)) / getExchangeRate(outputCurrency));
     };
 
     const toggleCurrencies = (outputCurrencyElement, inputCurrencyElement, outputAmountElement) => {
