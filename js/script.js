@@ -8,11 +8,13 @@
             const inputCurrency = inputCurrencyElement.value;
             const outputCurrency = outputCurrencyElement.value;
 
-            if (inputCurrency.localeCompare(outputCurrency) !== 0) {
-                outputAmountElement.value = calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount);
-            } else {
-                outputAmountElement.value = "Wybież różne waluty.";
-            }
+            outputAmountElement.value = inputCurrency.localeCompare(outputCurrency) !== 0 ? calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount) : "Wybież różne waluty.";
+
+            // if (inputCurrency.localeCompare(outputCurrency) !== 0) {
+            //     outputAmountElement.value = calculateResult(getExchangeRate(inputCurrency, outputCurrency), inputAmount);
+            // } else {
+            //     outputAmountElement.value = "Wybież różne waluty.";
+            // }
         };
     };
 
